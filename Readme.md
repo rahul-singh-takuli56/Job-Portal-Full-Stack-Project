@@ -1,11 +1,6 @@
-# Some Issues in this Project:
+# Some work need to be done
 
-    - On my Jobs page: Jobs are not showing IDK why ?
-
-# Some More work to do on this Project:
-
-    <!-- - Auth0 Authentication- done -->
-    <!-- - footer - done -->
-    - Resume upload (backend) 
-    - subscribe (backend)
-    - Search onClick event handler (onclick pe pura page uploading why ???)
+- Router Protection
+- Apply, subsribe, resume upload have to be done
+- on Submit pe show the detials in banner section
+- use admin panel

@@ -103,13 +103,6 @@ async function run() {
             res.send(result);
         })
 
-        /*Resume upload */
-        app.post("/upload", upload.single("upload-resume"), async (req, res) => {
-            console.log(req.body);
-            console.log(req.file);
-
-            return res.redirect("/");
-        });
 
         await client.db("admin").command({ ping: 1 });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
