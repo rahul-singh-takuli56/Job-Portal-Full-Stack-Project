@@ -16,7 +16,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-/* Middleware */
 app.use(express.json());
 app.use(cors());
 
@@ -24,7 +23,6 @@ app.use(cors());
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@job-portal-website.sskyu2u.mongodb.net/?retryWrites=true&w=majority&appName=Job-Portal-Website`;
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
     serverApi: {
         version: ServerApiVersion.v1,
@@ -37,11 +35,9 @@ async function run() {
     try {
         await client.connect();
 
-        /*Creating a databse */
         const db = client.db('mernJobPortal');
         const jobsCollection = db.collection("demoJobs");
 
-        /*Post a Job*/
         app.post("/post-job", async (req, res) => {
             const body = req.body;
             body.createAt = new Date();
@@ -56,13 +52,11 @@ async function run() {
             }
         });
 
-        /*Get all jobs */
         app.get("/all-jobs", async (req, res) => {
             const jobs = await jobsCollection.find({}).toArray();
             res.send(jobs);
         })
 
-        /*Get single job using id*/
         app.get("/all-jobs/:id", async (req, res) => {
             const id = req.params.id;
             const job = await jobsCollection.findOne({
@@ -71,7 +65,6 @@ async function run() {
             res.send(job);
         })
 
-        /*Get jobs by email*/
         app.get("/myJobs/:email", async (req, res) => {
             // console.log(req.params.email);
             const jobs = await jobsCollection.find({ postedBy: req.params.email }).toArray();
@@ -79,7 +72,6 @@ async function run() {
         })
 
 
-        /*Delete a Job*/
         app.delete("/job/:id", async (req, res) => {
             const id = req.params.id;
             const filter = { _id: new ObjectId(id) }
@@ -87,7 +79,6 @@ async function run() {
             res.send(result);
         })
 
-        /*Update a jobs*/
         app.patch("/update-job/:id", async (req, res) => {
             const id = req.params.id;
             const jobData = req.body;
